@@ -82,6 +82,7 @@ addChild("CameraServo",cameraServo);
 
         leftSpeedControllerGroup = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
         rightSpeedControllerGroup = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
+        rightSpeedControllerGroup.setInverted(true);
         myDifferentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup);
 
     }
