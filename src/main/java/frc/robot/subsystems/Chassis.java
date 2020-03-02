@@ -54,16 +54,27 @@ private Servo cameraServo;
     private SpeedControllerGroup rightSpeedControllerGroup;
     private DifferentialDrive myDifferentialDrive;
 
+    
+    public final int GETOUTOFTHEWAYDISTANCE = 40;
+    public final double LEFTTARGETZONEDISTANCE = 7.0;
+    public final double RIGHTTARGETZONEDISTANCE = 5.0;
+    public final double CENTERTARGETZONEDISTANCE = 4.0;
     public final double FORWARDDISTANCE = 40.0;
     public final double BACKWARDSDISTANCE = 20.0;
-    private double winchCircumference = 2 * Math.PI;
-    private double countsPerRevolution = 42;
+    private final double DRIVEWHEELCIRCUMFERENCE = 8 * Math.PI;
+    private final double COUNTSPERREVOLUTION = 42;
     public final double NORMAL = 0.5;
     public final double STOP = 0.0;
     public final double CAMERASERVOINCREMENT = 0.2;
     public final double CAMERASERVODECREMENT = CAMERASERVOINCREMENT;
     public final double MAXSERVOPOSITION = 1.0;
     public final double MINSERVOPOSITION = 0.0;
+    public final double RIGHTPIVOT = 90.0;
+    public final double LEFTPIVOT = -1 * RIGHTPIVOT;
+    public double PIVOT_DISTANCE = Math.sqrt(Math.pow(33, 2) + Math.pow(39, 2));
+
+
+    private boolean isAutonomousDriveDone = false;
     
     private final Gyro gyro = new ADXRS450_Gyro();
 
@@ -136,16 +147,24 @@ addChild("CameraServo",cameraServo);
     }
 
     public double getAverageEncoderValue() {
-        return (leftFrontEncoder.getPosition() + rightFrontEncoder.getPosition() + rightRearEncoder.getPosition()
-                + leftRearEncoder.getPosition()) / 4;
+        return ((leftFrontEncoder.getPosition() + leftRearEncoder.getPosition())/2);
+        //assuming that left encoder increases position when going forward
+        //return ((rightFrontEncoder.getPosition()+ rightRearEncoder.getPosition())/2);
+        //assuming that right encoder increases position when going forward
     }
 
-    public double getTotalCounts(double distance) {
-        return (distance / winchCircumference) * countsPerRevolution;
+    public double getTotalDistanceCounts(double distance) {
+        return (distance / DRIVEWHEELCIRCUMFERENCE) * COUNTSPERREVOLUTION;
     }
 
     public double getCameraServoPosition() {
         return cameraServo.getPosition();
     }
 
+    public boolean isAutonomousDriveDone(){
+        return isAutonomousDriveDone;
+    }
+    public void setAutonomousDriveDone(boolean a){
+        isAutonomousDriveDone = a;
+    }
 }
