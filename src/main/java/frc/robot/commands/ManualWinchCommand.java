@@ -10,6 +10,7 @@
 
 
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
@@ -43,7 +44,17 @@ public class ManualWinchCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.climb.setClimbWinchMotor(Robot.oi.operatorController.getRawAxis(Robot.oi.RIGHT_THUMB));
+        if(Robot.climb.getLockPiston() == Value.kReverse){
+            Robot.climb.setClimbWinchMotor(Robot.chassis.STOP);
+        }
+        else{
+            if(Robot.oi.operatorController.getRawAxis(Robot.oi.RIGHT_THUMB) < 0.0){
+                Robot.climb.setClimbWinchMotor(Robot.chassis.STOP);
+            }
+            else{
+                Robot.climb.setClimbWinchMotor(Robot.oi.RIGHT_THUMB);
+            }
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
