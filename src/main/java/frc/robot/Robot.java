@@ -76,6 +76,7 @@ panel = new Panel();
         // (which it very likely will), subsystems are not guaranteed to be
         // constructed yet. Thus, their requires() statements may grab null
         // pointers. Bad news. Don't move it.
+        oi = new OI();
         cam0 = CameraServer.getInstance().startAutomaticCapture();
         cam0.setResolution(IMG_WIDTH, IMG_HEIGHT);
 
@@ -101,6 +102,7 @@ panel = new Panel();
         default://gets out of the way
             chooser.setDefaultOption("AutonomousCommand", new AutonomousGetOutOfTheWayCommand());
         }
+        climb.extendLockPiston();
         SmartDashboard.putData("Auto mode", chooser);
     }
 
