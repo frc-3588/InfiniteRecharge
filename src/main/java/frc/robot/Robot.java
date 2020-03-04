@@ -102,7 +102,6 @@ panel = new Panel();
         default://gets out of the way
             chooser.setDefaultOption("AutonomousCommand", new AutonomousGetOutOfTheWayCommand());
         }
-        climb.extendLockPiston();
         SmartDashboard.putData("Auto mode", chooser);
     }
 
