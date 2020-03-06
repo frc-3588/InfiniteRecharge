@@ -12,6 +12,7 @@ package frc.robot.subsystems;
 
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -72,7 +73,7 @@ private Servo cameraServo;
     public final double RIGHTPIVOT = 90.0;
     public final double LEFTPIVOT = -1 * RIGHTPIVOT;
     public double PIVOT_DISTANCE = Math.sqrt(Math.pow(33, 2) + Math.pow(39, 2));
-
+    public final double SERVOPOSITION = 0.5;
 
     private boolean isAutonomousDriveDone = false;
     
@@ -93,9 +94,10 @@ addChild("CameraServo",cameraServo);
 
         leftSpeedControllerGroup = new SpeedControllerGroup(leftFrontMotor, leftRearMotor);
         rightSpeedControllerGroup = new SpeedControllerGroup(rightFrontMotor, rightRearMotor);
-        rightSpeedControllerGroup.setInverted(true);
+        rightSpeedControllerGroup.setInverted(false);
         myDifferentialDrive = new DifferentialDrive(leftSpeedControllerGroup, rightSpeedControllerGroup);
 
+        setCameraServoPosition(SERVOPOSITION);
     }
 
     @Override
@@ -123,7 +125,7 @@ addChild("CameraServo",cameraServo);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void setTankDrivePower(double leftPower, double rightPower) {
-        myDifferentialDrive.tankDrive(leftPower, rightPower);
+        myDifferentialDrive.tankDrive(-0.7 * leftPower, -0.7 * rightPower);
     }
 
     public void setCameraServoPosition(double position) {
