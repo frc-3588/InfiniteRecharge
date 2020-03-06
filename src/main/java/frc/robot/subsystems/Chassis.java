@@ -123,7 +123,7 @@ addChild("CameraServo",cameraServo);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void setTankDrivePower(double leftPower, double rightPower) {
-        myDifferentialDrive.tankDrive(-1 * leftPower, -1 * rightPower);
+        myDifferentialDrive.tankDrive(leftPower, rightPower);
     }
 
     public void setCameraServoPosition(double position) {
