@@ -44,8 +44,8 @@ public class DriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.chassis.setTankDrivePower(-1 * Robot.oi.driverController.getRawAxis(Robot.oi.LEFT_THUMB),
-                Robot.oi.driverController.getRawAxis(-1 * Robot.oi.RIGHT_THUMB));
+        Robot.chassis.setTankDrivePower(-1 * Robot.oi.driverController.getRawAxis(-Robot.oi.LEFT_THUMB),
+                Robot.oi.driverController.getRawAxis(-Robot.oi.RIGHT_THUMB));
     }
 
     // Make this return true when this Command no longer needs to run execute()
