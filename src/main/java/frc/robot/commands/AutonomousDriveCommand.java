@@ -42,18 +42,18 @@ public class AutonomousDriveCommand extends Command {
 
     // Called just before this Command runs the first time
     @Override
-    protected void initialize() {
+    protected void initialize() { 
         if(m_leftpower > 0){//assuming that left power, when positive, increases count value
             totalCounts = Robot.chassis.getTotalDistanceCounts(m_distance) + Robot.chassis.getAverageEncoderValue();
         }else{
             totalCounts = Robot.chassis.getTotalDistanceCounts(m_distance) - Robot.chassis.getAverageEncoderValue();
         }
-        Robot.chassis.setTankDrivePower(m_leftpower, m_rightpower);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+        Robot.chassis.setTankDrivePower(m_leftpower, m_rightpower);
     }
 
     // Make this return true when this Command no longer needs to run execute()
