@@ -169,4 +169,13 @@ public class Chassis extends Subsystem {
     public void setAutonomousDriveDone(boolean a) {
         isAutonomousDriveDone = a;
     }
+    public void resetGyro(){
+        gyro.reset();
+    }
+    public void calibrateGyro(){
+        gyro.calibrate();
+    }
+    public double getGyroAngle(){
+        return gyro.getAngle();
+    }
 }
